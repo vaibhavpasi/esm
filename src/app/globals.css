@@ -1,0 +1,502 @@
+@import "tailwindcss";
+
+@theme {
+  /* Indian Army Tactical Olive Night Palette */
+  --color-navy-50: #f4f6f1;
+  --color-navy-100: #e2e8dc;
+  --color-navy-200: #c4d2bc;
+  --color-navy-300: #a2b998;
+  --color-navy-400: #7d9c72;
+  --color-navy-500: #57784c;
+  --color-navy-600: #425d39;
+  --color-navy-700: #31462a;
+  --color-navy-800: #21301c;
+  --color-navy-900: #141e11;
+  --color-navy-950: #0b1209;
+
+  /* Indian Army Regimental Olive Green (OG) */
+  --color-military-50: #f5f8f2;
+  --color-military-100: #e6eddb;
+  --color-military-200: #ccdcba;
+  --color-military-300: #aec894;
+  --color-military-400: #8eb16f;
+  --color-military-500: #557538;
+  --color-military-600: #435e2b;
+  --color-military-700: #32471f;
+  --color-military-800: #223114;
+  --color-military-900: #111a09;
+
+  /* Indian Army Regimental Scarlet Crimson & Brass */
+  --color-armyred-500: #b91c1c;
+  --color-armyred-600: #991b1b;
+  --color-armyred-700: #7f1d1d;
+  --color-armygold-400: #facc15;
+  --color-armygold-500: #eab308;
+  --color-armygold-600: #ca8a04;
+
+  --color-saffron-50: #fff9f0;
+  --color-saffron-100: #ffecd1;
+  --color-saffron-200: #ffd8a3;
+  --color-saffron-300: #ffc270;
+  --color-saffron-400: #ffa93d;
+  --color-saffron-500: #f58220;
+  --color-saffron-600: #d66411;
+  --color-saffron-700: #aa4a0c;
+  --color-saffron-800: #82340b;
+  --color-saffron-900: #5c2207;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
+}
+
+/* ── Base ─────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #1a1a2e;
+  background: #fafbfd;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Focus States ──────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--color-saffron-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Senior / Retired Persons Mode ──────────────────── */
+html.elder-mode {
+  font-size: 20px !important;
+}
+
+html.elder-mode body {
+  letter-spacing: 0.015em;
+  line-height: 1.7;
+}
+
+html.elder-mode button,
+html.elder-mode a {
+  min-height: 44px;
+}
+
+/* ── Skip Link ──────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: var(--color-navy-700);
+  color: white;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Scroll Animations ──────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+/* ── Floating / Parallax ──────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(10px, -5px); }
+  50% { transform: translate(-5px, -10px); }
+  75% { transform: translate(-10px, 5px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+@keyframes particle-float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-drift { animation: drift 20s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+
+/* ── Hero Particles ──────────────────────────── */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 153, 51, 0.4);
+  animation: particle-float linear infinite;
+}
+
+/* ── Glass Effect ──────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.glass-dark {
+  background: rgba(7, 20, 40, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Premium Card ──────────────────────────────── */
+.premium-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.premium-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Gradient Text ─────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-navy-700), var(--color-navy-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-saffron {
+  background: linear-gradient(135deg, var(--color-saffron-500), var(--color-saffron-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section Dividers ──────────────────────────── */
+.section-divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-saffron-500), var(--color-navy-500));
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* ── Tricolor Stripe ──────────────────────────── */
+.tricolor-top {
+  position: relative;
+}
+.tricolor-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--color-saffron-500) 0%,
+    var(--color-saffron-500) 33.33%,
+    white 33.33%,
+    white 66.66%,
+    var(--color-military-500) 66.66%,
+    var(--color-military-500) 100%
+  );
+}
+
+/* ── Counter Animation ──────────────────────── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Lightbox ──────────────────────────────────── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Mobile Bottom Bar ──────────────────────── */
+.mobile-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 8px 16px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+/* ── Admin Layout ──────────────────────────── */
+.admin-sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--color-navy-900), var(--color-navy-800));
+  color: white;
+}
+
+/* ── Scrollbar Styling ──────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-300);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy-400);
+}
+
+/* ── Form Styles ──────────────────────────── */
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-navy-400);
+  box-shadow: 0 0 0 3px rgba(45, 80, 134, 0.1);
+}
+.form-input::placeholder {
+  color: #94a3b8;
+}
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-navy-800);
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+/* ── Badge ──────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.badge-saffron { background: var(--color-saffron-100); color: var(--color-saffron-800); }
+.badge-navy { background: var(--color-navy-100); color: var(--color-navy-800); }
+.badge-military { background: var(--color-military-100); color: var(--color-military-800); }
+.badge-urgent { background: #fee2e2; color: #991b1b; }
+
+/* ── Masonry Grid ──────────────────────────── */
+.masonry-grid {
+  columns: 3;
+  column-gap: 16px;
+}
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+@media (max-width: 1024px) {
+  .masonry-grid { columns: 2; }
+}
+@media (max-width: 640px) {
+  .masonry-grid { columns: 1; }
+}
+
+/* ── Horizontal Scroll ──────────────────── */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+.horizontal-scroll > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ── Diya Flame Animation ────────────────── */
+@keyframes flameWicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    filter: drop-shadow(0 0 10px rgba(255, 180, 0, 0.8)) drop-shadow(0 0 25px rgba(255, 100, 0, 0.6));
+  }
+  25% {
+    transform: scale(1.06, 0.96) rotate(1.5deg);
+    filter: drop-shadow(0 0 14px rgba(255, 200, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 120, 0, 0.7));
+  }
+  50% {
+    transform: scale(0.96, 1.05) rotate(-1deg);
+    filter: drop-shadow(0 0 12px rgba(255, 190, 0, 0.85)) drop-shadow(0 0 28px rgba(255, 90, 0, 0.65));
+  }
+  75% {
+    transform: scale(1.04, 0.98) rotate(2deg);
+    filter: drop-shadow(0 0 16px rgba(255, 210, 0, 0.95)) drop-shadow(0 0 35px rgba(255, 140, 0, 0.75));
+  }
+}
+.animate-flame {
+  animation: flameWicker 1.4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* ── High Contrast Mode for Senior Accessibility ──── */
+html.high-contrast {
+  filter: contrast(115%);
+}
+html.high-contrast body {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+html.high-contrast .premium-card,
+html.high-contrast .glass,
+html.high-contrast .glass-dark,
+html.high-contrast section {
+  background: #0a0a0a !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.high-contrast h1,
+html.high-contrast h2,
+html.high-contrast h3,
+html.high-contrast h4,
+html.high-contrast strong {
+  color: #ffff00 !important;
+}
+html.high-contrast p,
+html.high-contrast span,
+html.high-contrast li {
+  color: #ffffff !important;
+}
+html.high-contrast a {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
+html.high-contrast button {
+  border: 2px solid #ffffff !important;
+}
+
+/* ── Scrollbar & UI Utilities ───────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(234, 179, 8, 0.4);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(234, 179, 8, 0.7);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
