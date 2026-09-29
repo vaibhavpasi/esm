@@ -8,10 +8,11 @@ import IndianArmyCrest from './IndianArmyCrest';
 export default function Hero() {
   const particleRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   useEffect(() => {
-    setLoaded(true);
+    const id = requestAnimationFrame(() => setLoaded(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   // Generate particles

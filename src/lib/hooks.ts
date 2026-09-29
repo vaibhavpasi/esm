@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useSyncExternalStore } from 'react';
 
 /**
  * Intersection Observer hook for scroll-triggered animations.
@@ -68,20 +68,24 @@ export function useCounter(target: number, duration = 2000) {
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) {
-      setCount(target);
-      return;
+      const anim = requestAnimationFrame(() => setCount(target));
+      return () => cancelAnimationFrame(anim);
     }
 
     let startTime: number;
+    let animId: number;
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
       setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(animate);
+      if (progress < 1) {
+        animId = requestAnimationFrame(animate);
+      }
     };
 
-    requestAnimationFrame(animate);
+    animId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animId);
   }, [started, target, duration]);
 
   return { count, ref };
@@ -138,20 +142,27 @@ export function useParallax(speed = 0.3) {
 }
 
 /**
- * Media query hook.
+ * Media query hook using useSyncExternalStore for hydration safety.
  */
 export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
+  const subscribe = useCallback(
+    (callback: () => void) => {
+      if (typeof window === 'undefined') return () => {};
+      const mql = window.matchMedia(query);
+      mql.addEventListener('change', callback);
+      return () => mql.removeEventListener('change', callback);
+    },
+    [query]
+  );
 
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    setMatches(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
-  }, [query]);
+  const getSnapshot = () => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia(query).matches;
+  };
 
-  return matches;
+  const getServerSnapshot = () => false;
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 /**

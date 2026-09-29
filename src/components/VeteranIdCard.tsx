@@ -171,6 +171,7 @@ export default function VeteranIdCard({
         {/* Card Footer Strip with microchip & security seal */}
         <div className="absolute bottom-2 left-6 right-6 flex items-center justify-between text-[8px] text-white/60 border-t border-white/10 pt-1.5">
           <span className="tracking-widest">{branchDetails.label}</span>
+          <span className="text-white/70">Validity: <strong className="text-white font-bold">{validUntil}</strong></span>
           <span className="font-mono text-saffron-400">NASHIK • BHARAT</span>
         </div>
       </div>

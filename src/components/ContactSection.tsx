@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { contactInfo } from '@/lib/data';
 import { useReveal } from '@/lib/hooks';
 

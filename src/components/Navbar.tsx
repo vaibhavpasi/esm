@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useScrollPosition } from '@/lib/hooks';
@@ -27,11 +27,17 @@ export default function Navbar() {
   const pathname = usePathname();
   const { t, language } = useLanguage();
   const navRef = useRef<HTMLElement>(null);
+  const prevPathnameRef = useRef(pathname);
 
   // Close menus on route change
   useEffect(() => {
-    setMobileOpen(false);
-    setActiveDropdown(null);
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      queueMicrotask(() => {
+        setMobileOpen(false);
+        setActiveDropdown(null);
+      });
+    }
   }, [pathname]);
 
   // Lock body scroll when mobile menu open

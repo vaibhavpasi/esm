@@ -136,6 +136,13 @@ export default function BuglePlayer() {
   const isPlayingRef = useRef(false);
   const abortControllerRef = useRef<boolean>(false);
 
+  const stopPlayback = () => {
+    abortControllerRef.current = true;
+    isPlayingRef.current = false;
+    setIsPlaying(false);
+    setCurrentNoteIndex(-1);
+  };
+
   // Clean up on unmount
   useEffect(() => {
     return () => {
@@ -216,13 +223,6 @@ export default function BuglePlayer() {
         resolve();
       }, (duration) * 1000);
     });
-  };
-
-  const stopPlayback = () => {
-    abortControllerRef.current = true;
-    isPlayingRef.current = false;
-    setIsPlaying(false);
-    setCurrentNoteIndex(-1);
   };
 
   const handlePlay = async () => {

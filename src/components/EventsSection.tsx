@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { events } from '@/lib/data';
-import { formatDate, useReveal } from '@/lib/hooks';
+import { useReveal } from '@/lib/hooks';
 
 function EventCard({ event, index }: { event: typeof events[0]; index: number }) {
   return (

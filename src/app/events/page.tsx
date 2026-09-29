@@ -7,7 +7,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import { events } from '@/lib/data';
-import { formatDate } from '@/lib/hooks';
 
 export default function EventsPage() {
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'past' | 'welfare'>('all');

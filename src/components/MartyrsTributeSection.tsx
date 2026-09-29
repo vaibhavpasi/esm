@@ -55,16 +55,18 @@ export default function MartyrsTributeSection() {
   const [flowerPetals, setFlowerPetals] = useState<number[]>([]);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem('esm_tribute_paid');
-      const storedCount = localStorage.getItem('esm_tribute_count');
-      if (storedCount) {
-        setTributesCount(parseInt(storedCount, 10));
-      }
-      if (stored === 'true') {
-        setHasPaidTribute(true);
-      }
-    } catch {}
+    queueMicrotask(() => {
+      try {
+        const stored = localStorage.getItem('esm_tribute_paid');
+        const storedCount = localStorage.getItem('esm_tribute_count');
+        if (storedCount) {
+          setTributesCount(parseInt(storedCount, 10));
+        }
+        if (stored === 'true') {
+          setHasPaidTribute(true);
+        }
+      } catch {}
+    });
   }, []);
 
   const handlePayTribute = () => {

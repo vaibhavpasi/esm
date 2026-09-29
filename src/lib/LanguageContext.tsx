@@ -23,36 +23,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [highContrast, setHighContrast] = useState<boolean>(false);
   const [elderMode, setElderMode] = useState<boolean>(false);
 
-  // Initialize from localStorage if client-side
-  useEffect(() => {
-    try {
-      const savedLang = localStorage.getItem('esm_lang') as Language;
-      if (savedLang && (savedLang === 'en' || savedLang === 'mr' || savedLang === 'hi')) {
-        setLanguageState(savedLang);
-      }
-      const savedContrast = localStorage.getItem('esm_contrast');
-      if (savedContrast === 'true') {
-        setHighContrast(true);
-      }
-      const savedElder = localStorage.getItem('esm_elder_mode');
-      if (savedElder === 'true') {
-        setElderMode(true);
-        setTextSize('larger');
-      }
-    } catch {
-      // Ignore storage errors
-    }
-  }, []);
-
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    try {
-      localStorage.setItem('esm_lang', lang);
-    } catch {
-      // Ignore storage errors
-    }
-  };
-
   const setTextSize = (size: 'normal' | 'large' | 'larger') => {
     setTextSizeState(size);
     if (typeof document !== 'undefined') {
@@ -82,6 +52,38 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         document.documentElement.classList.remove('elder-mode');
       }
       try { localStorage.setItem('esm_elder_mode', 'false'); } catch {}
+    }
+  };
+
+  // Initialize from localStorage if client-side
+  useEffect(() => {
+    queueMicrotask(() => {
+      try {
+        const savedLang = localStorage.getItem('esm_lang') as Language;
+        if (savedLang && (savedLang === 'en' || savedLang === 'mr' || savedLang === 'hi')) {
+          setLanguageState(savedLang);
+        }
+        const savedContrast = localStorage.getItem('esm_contrast');
+        if (savedContrast === 'true') {
+          setHighContrast(true);
+        }
+        const savedElder = localStorage.getItem('esm_elder_mode');
+        if (savedElder === 'true') {
+          setElderMode(true);
+          setTextSize('larger');
+        }
+      } catch {
+        // Ignore storage errors
+      }
+    });
+  }, []);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem('esm_lang', lang);
+    } catch {
+      // Ignore storage errors
     }
   };
 

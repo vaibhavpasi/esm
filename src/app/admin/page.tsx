@@ -2,16 +2,18 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // In production, this would authenticate against a secure backend
     if (email && password) {
-      window.location.href = '/admin/dashboard';
+      router.push('/admin/dashboard');
     }
   };
 

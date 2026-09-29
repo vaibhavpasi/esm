@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notices, events, sampleMembers, sampleGrievances, downloads, galleryImages, officeBearers } from '@/lib/data';
 import { formatDate } from '@/lib/hooks';
 
@@ -384,7 +385,9 @@ function GalleryView() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {galleryImages.map((img) => (
           <div key={img.id} className="premium-card overflow-hidden group relative">
-            <img src={img.src} alt={img.alt} className="w-full h-40 object-cover" loading="lazy" />
+            <div className="relative w-full h-40">
+              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+            </div>
             <div className="p-3">
               <p className="text-navy-800 text-sm font-semibold truncate">{img.caption}</p>
               <p className="text-navy-500 text-xs">{img.category}</p>
@@ -412,8 +415,8 @@ function BearersView() {
       <div className="space-y-3">
         {officeBearers.map((b) => (
           <div key={b.id} className="premium-card p-5 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-navy-200 overflow-hidden shrink-0">
-              <img src={b.photo} alt={b.name} className="w-full h-full object-cover" />
+            <div className="w-12 h-12 rounded-full bg-navy-200 overflow-hidden shrink-0 relative">
+              <Image src={b.photo} alt={b.name} fill className="object-cover" sizes="48px" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-navy-800">{b.name}</p>

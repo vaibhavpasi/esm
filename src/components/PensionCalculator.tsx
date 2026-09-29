@@ -3,12 +3,6 @@
 import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 
-interface BenchmarkPension {
-  rank: string;
-  force: string;
-  approxBasic: number;
-}
-
 const benchmarkData: Record<string, number> = {
   // Army
   'Sepoy (17 Yrs)': 18807,

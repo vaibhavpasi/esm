@@ -112,8 +112,10 @@ export default function SearchOverlay({
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
-      setQuery('');
-      setResults([]);
+      queueMicrotask(() => {
+        setQuery('');
+        setResults([]);
+      });
     }
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
