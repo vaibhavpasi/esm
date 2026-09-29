@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import AppleStorefrontSection from '@/components/AppleStorefrontSection';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import StatsSection from '@/components/StatsSection';
@@ -64,6 +65,7 @@ export default function Home() {
 
       <main id="main-content">
         <Hero />
+        <AppleStorefrontSection />
         <AboutSection />
         <ServicesSection />
         <StatsSection />
