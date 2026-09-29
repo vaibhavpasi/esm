@@ -6,7 +6,10 @@ import IndianArmyCrest from './IndianArmyCrest';
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-900 text-white tricolor-top" role="contentinfo">
+    <footer className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 text-white relative" role="contentinfo">
+      {/* Animated Glowing Tricolor Bar on Footer Top */}
+      <div className="tricolor-glow-bar" aria-hidden="true" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
@@ -14,24 +17,29 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <IndianArmyCrest size="md" showMotto={false} />
               <div>
-                <p className="font-heading font-bold text-white">ESM Welfare Association</p>
-                <p className="text-amber-400 font-bold text-xs">भारतीय सेना • सेवा परमो धर्मः</p>
-                <p className="text-white/60 text-[11px]">Nashik District, Maharashtra</p>
+                <p className="font-heading font-extrabold text-white text-base">ESM Welfare Association</p>
+                <p className="text-gold-300 font-bold text-xs tracking-wide">भारतीय सेना • सेवा परमो धर्मः</p>
+                <p className="text-white/60 text-[11px]">Nashik & Deolali Garrison, MH</p>
               </div>
             </div>
-            <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-6">
+            <p className="text-white/75 text-xs sm:text-sm leading-relaxed mb-6">
               Dedicated welfare platform serving Indian Army, Navy, and Air Force veterans, Veer Naris, and defence families across Nashik district.
             </p>
             {/* Social icons */}
-            <div className="flex gap-3">
-              {['Facebook', 'Twitter', 'YouTube', 'Instagram'].map((social) => (
+            <div className="flex gap-2.5">
+              {[
+                { name: 'Facebook', bg: 'hover:bg-blue-600', icon: 'f' },
+                { name: 'Twitter', bg: 'hover:bg-sky-500', icon: '𝕏' },
+                { name: 'YouTube', bg: 'hover:bg-red-600', icon: '▶' },
+                { name: 'WhatsApp', bg: 'hover:bg-emerald-600', icon: '💬' },
+              ].map((social) => (
                 <a
-                  key={social}
+                  key={social.name}
                   href="#"
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-saffron-500 flex items-center justify-center transition-all text-sm"
-                  aria-label={`Follow us on ${social}`}
+                  className={`w-9 h-9 rounded-xl bg-white/10 ${social.bg} hover:text-white flex items-center justify-center transition-all duration-300 text-xs font-bold border border-white/10 hover:border-transparent hover:scale-110 shadow-sm`}
+                  aria-label={`Follow us on ${social.name}`}
                 >
-                  {social[0]}
+                  {social.icon}
                 </a>
               ))}
             </div>

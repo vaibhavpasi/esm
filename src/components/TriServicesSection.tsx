@@ -193,18 +193,46 @@ export default function TriServicesSection() {
         {/* Force Navigation Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {[
-            { id: 'army' as const, label: 'Indian Army', marathi: 'भारतीय सेना (थल)', icon: '🪖', color: 'hover:border-military-400' },
-            { id: 'navy' as const, label: 'Indian Navy', marathi: 'भारतीय नौसेना', icon: '⚓', color: 'hover:border-cyan-400' },
-            { id: 'airforce' as const, label: 'Indian Air Force', marathi: 'भारतीय वायु सेना', icon: '✈️', color: 'hover:border-sky-400' },
-            { id: 'parity' as const, label: 'Tri-Service Rank Matrix', marathi: 'समकक्ष पदश्रेणी तक्ता', icon: '🎖️', color: 'hover:border-amber-400' },
+            {
+              id: 'army' as const,
+              label: 'Indian Army',
+              marathi: 'भारतीय सेना (थल)',
+              icon: '🪖',
+              activeClass: 'bg-gradient-to-r from-military-800 via-military-700 to-navy-950 text-gold-200 border-gold-400 shadow-[0_0_25px_rgba(202,138,4,0.35)]',
+              inactiveClass: 'bg-navy-900/80 text-white/80 border-military-500/30 hover:border-military-400 hover:text-white',
+            },
+            {
+              id: 'navy' as const,
+              label: 'Indian Navy',
+              marathi: 'भारतीय नौसेना',
+              icon: '⚓',
+              activeClass: 'bg-gradient-to-r from-blue-900 via-navy-800 to-cyan-900 text-cyan-200 border-cyan-400 shadow-[0_0_25px_rgba(6,182,212,0.35)]',
+              inactiveClass: 'bg-navy-900/80 text-white/80 border-cyan-500/30 hover:border-cyan-400 hover:text-white',
+            },
+            {
+              id: 'airforce' as const,
+              label: 'Indian Air Force',
+              marathi: 'भारतीय वायु सेना',
+              icon: '✈️',
+              activeClass: 'bg-gradient-to-r from-sky-800 via-blue-900 to-iaf-800 text-sky-100 border-sky-400 shadow-[0_0_25px_rgba(56,189,248,0.35)]',
+              inactiveClass: 'bg-navy-900/80 text-white/80 border-sky-500/30 hover:border-sky-400 hover:text-white',
+            },
+            {
+              id: 'parity' as const,
+              label: 'Tri-Service Rank Matrix',
+              marathi: 'समकक्ष पदश्रेणी तक्ता',
+              icon: '🎖️',
+              activeClass: 'bg-gradient-to-r from-saffron-500 via-amber-500 to-saffron-600 text-white border-amber-300 shadow-[0_0_25px_rgba(255,103,31,0.35)]',
+              inactiveClass: 'bg-navy-900/80 text-white/80 border-saffron-500/30 hover:border-saffron-400 hover:text-white',
+            },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base transition-all shadow-lg border ${
+              className={`flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base transition-all shadow-lg border-2 ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-saffron-500 to-saffron-600 text-white border-saffron-400 scale-105'
-                  : `bg-navy-900/80 text-white/80 border-white/10 ${tab.color} hover:bg-navy-800`
+                  ? `${tab.activeClass} scale-105`
+                  : `${tab.inactiveClass} hover:bg-navy-800`
               }`}
             >
               <span className="text-xl">{tab.icon}</span>
@@ -512,18 +540,23 @@ export default function TriServicesSection() {
                 </div>
 
                 {/* Filter buttons */}
-                <div className="flex flex-wrap gap-1.5">
-                  {(['All', 'Commissioned Officer', 'JCO / Warrant Officer', 'NCO & Other Ranks'] as const).map((cat) => (
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { label: 'All', activeBg: 'bg-gradient-to-r from-saffron-500 to-amber-500 text-white shadow-md ring-1 ring-saffron-300' },
+                    { label: 'Commissioned Officer', activeBg: 'bg-gradient-to-r from-amber-500 to-gold-600 text-white shadow-md ring-1 ring-amber-300' },
+                    { label: 'JCO / Warrant Officer', activeBg: 'bg-gradient-to-r from-rose-600 to-red-600 text-white shadow-md ring-1 ring-rose-300' },
+                    { label: 'NCO & Other Ranks', activeBg: 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md ring-1 ring-emerald-300' },
+                  ].map((cat) => (
                     <button
-                      key={cat}
-                      onClick={() => setFilterCategory(cat)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                        filterCategory === cat
-                          ? 'bg-saffron-500 text-white'
-                          : 'bg-white/10 text-white/70 hover:bg-white/15'
+                      key={cat.label}
+                      onClick={() => setFilterCategory(cat.label as typeof filterCategory)}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                        filterCategory === cat.label
+                          ? `${cat.activeBg} scale-105`
+                          : 'bg-white/10 text-white/75 hover:bg-white/15 hover:text-white border border-white/10'
                       }`}
                     >
-                      {cat}
+                      {cat.label}
                     </button>
                   ))}
                 </div>

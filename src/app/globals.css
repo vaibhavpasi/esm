@@ -1,49 +1,83 @@
 @import "tailwindcss";
 
 @theme {
-  /* Indian Army Tactical Olive Night Palette */
-  --color-navy-50: #f4f6f1;
-  --color-navy-100: #e2e8dc;
-  --color-navy-200: #c4d2bc;
-  --color-navy-300: #a2b998;
-  --color-navy-400: #7d9c72;
-  --color-navy-500: #57784c;
-  --color-navy-600: #425d39;
-  --color-navy-700: #31462a;
-  --color-navy-800: #21301c;
-  --color-navy-900: #141e11;
-  --color-navy-950: #0b1209;
+  /* Indian Navy & Deep Regal Blue Palette */
+  --color-navy-50: #eff6ff;
+  --color-navy-100: #dbeafe;
+  --color-navy-200: #bfdbfe;
+  --color-navy-300: #93c5fd;
+  --color-navy-400: #60a5fa;
+  --color-navy-500: #3b82f6;
+  --color-navy-600: #2563eb;
+  --color-navy-700: #1d4ed8;
+  --color-navy-800: #1e40af;
+  --color-navy-900: #0d1e44;
+  --color-navy-950: #060e22;
 
   /* Indian Army Regimental Olive Green (OG) */
-  --color-military-50: #f5f8f2;
-  --color-military-100: #e6eddb;
-  --color-military-200: #ccdcba;
-  --color-military-300: #aec894;
-  --color-military-400: #8eb16f;
+  --color-military-50: #f4f7f2;
+  --color-military-100: #e4ebd8;
+  --color-military-200: #c9d8b3;
+  --color-military-300: #a7c087;
+  --color-military-400: #86a65e;
   --color-military-500: #557538;
   --color-military-600: #435e2b;
   --color-military-700: #32471f;
   --color-military-800: #223114;
-  --color-military-900: #111a09;
+  --color-military-900: #141e0c;
+  --color-military-950: #0a1106;
 
-  /* Indian Army Regimental Scarlet Crimson & Brass */
-  --color-armyred-500: #b91c1c;
-  --color-armyred-600: #991b1b;
-  --color-armyred-700: #7f1d1d;
-  --color-armygold-400: #facc15;
-  --color-armygold-500: #eab308;
-  --color-armygold-600: #ca8a04;
+  /* Indian Air Force Aviation Sky & Azure */
+  --color-iaf-50: #f0f9ff;
+  --color-iaf-100: #e0f2fe;
+  --color-iaf-200: #bae6fd;
+  --color-iaf-300: #7dd3fc;
+  --color-iaf-400: #38bdf8;
+  --color-iaf-500: #0ea5e9;
+  --color-iaf-600: #0284c7;
+  --color-iaf-700: #0369a1;
+  --color-iaf-800: #075985;
+  --color-iaf-900: #0c4a6e;
+  --color-iaf-950: #082f49;
 
-  --color-saffron-50: #fff9f0;
-  --color-saffron-100: #ffecd1;
-  --color-saffron-200: #ffd8a3;
-  --color-saffron-300: #ffc270;
-  --color-saffron-400: #ffa93d;
-  --color-saffron-500: #f58220;
-  --color-saffron-600: #d66411;
-  --color-saffron-700: #aa4a0c;
-  --color-saffron-800: #82340b;
-  --color-saffron-900: #5c2207;
+  /* Indian Army Regimental Scarlet Crimson & Maroon */
+  --color-armyred-400: #fb7185;
+  --color-armyred-500: #f43f5e;
+  --color-armyred-600: #e11d48;
+  --color-armyred-700: #be123c;
+  --color-armyred-800: #9f1239;
+  --color-armyred-900: #881337;
+
+  /* Gallantry Medal Brass & Radiant Gold */
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-500: #eab308;
+  --color-gold-600: #ca8a04;
+  --color-gold-700: #a16207;
+
+  /* Vibrant National Tricolor Saffron (Kesari) */
+  --color-saffron-50: #fff8f0;
+  --color-saffron-100: #ffeed8;
+  --color-saffron-200: #ffd9ad;
+  --color-saffron-300: #ffbe76;
+  --color-saffron-400: #ff9933;
+  --color-saffron-500: #ff671f;
+  --color-saffron-600: #e65100;
+  --color-saffron-700: #c23e00;
+  --color-saffron-800: #9c3203;
+  --color-saffron-900: #7c2a07;
+
+  /* Vibrant National Tricolor Green (India Green) */
+  --color-tiranga-50: #f0fdf4;
+  --color-tiranga-100: #dcfce7;
+  --color-tiranga-200: #bbf7d0;
+  --color-tiranga-300: #86efac;
+  --color-tiranga-400: #4ade80;
+  --color-tiranga-500: #22c55e;
+  --color-tiranga-600: #16a34a;
+  --color-tiranga-700: #15803d;
+  --color-tiranga-800: #166534;
+  --color-tiranga-900: #046a38;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
@@ -231,24 +265,73 @@ html.elder-mode a {
 
 /* ── Gradient Text ─────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-navy-700), var(--color-navy-500));
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .gradient-text-saffron {
-  background: linear-gradient(135deg, var(--color-saffron-500), var(--color-saffron-600));
+  background: linear-gradient(135deg, #ff671f, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-gold {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-tricolor {
+  background: linear-gradient(90deg, #ff671f, #ffffff, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-army {
+  background: linear-gradient(135deg, #a7c087, #eab308);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-navy {
+  background: linear-gradient(135deg, #60a5fa, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-iaf {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9, #93c5fd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* ── Glow Effects & Rich Accents ────────────────── */
+.glow-saffron {
+  box-shadow: 0 0 25px rgba(255, 103, 31, 0.35);
+}
+.glow-gold {
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.35);
+}
+.glow-emerald {
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.35);
+}
+.glow-navy {
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.35);
+}
+
+.tricolor-glow-bar {
+  background: linear-gradient(90deg, #ff671f 0%, #ffffff 50%, #15803d 100%);
+  box-shadow: 0 0 14px rgba(255, 103, 31, 0.6), 0 0 24px rgba(34, 197, 94, 0.4);
+}
+
 /* ── Section Dividers ──────────────────────────── */
 .section-divider {
-  width: 60px;
+  width: 72px;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-saffron-500), var(--color-navy-500));
-  border-radius: 2px;
+  background: linear-gradient(90deg, #ff671f, #eab308, #22c55e);
+  border-radius: 4px;
   margin: 0 auto;
 }
 

@@ -49,22 +49,25 @@ export default function PensionCalculator() {
   const annualized = totalMonthlyPension * 12;
 
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl max-w-4xl mx-auto my-12">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 mb-8">
+    <div className="bg-white rounded-3xl p-6 sm:p-10 border-2 border-navy-100/80 hover:border-gold-400/40 shadow-2xl max-w-4xl mx-auto my-12 relative overflow-hidden transition-all">
+      {/* Tricolor Top Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-saffron-500 via-gold-400 to-tiranga-500" aria-hidden="true" />
+
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 mb-8 pt-2">
         <div>
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-saffron-100 text-saffron-800 uppercase tracking-wider inline-block mb-2">
-            Interactive Defence Tool
+          <span className="text-xs font-bold px-3 py-1 rounded-full bg-saffron-50 text-saffron-700 border border-saffron-200 uppercase tracking-wider inline-block mb-2">
+            🇮🇳 Interactive Defence Tool
           </span>
-          <h3 className="font-heading font-extrabold text-2xl text-navy-800">
+          <h3 className="font-heading font-extrabold text-2xl text-navy-900">
             {language === 'mr' ? 'माजी सैनिक पेन्शन व महागाई भत्ता गणक' : 'SPARSH / OROP Pension & DR Calculator'}
           </h3>
           <p className="text-xs text-slate-500 mt-1">
             Calculate your approximate monthly defence pension with current Dearness Relief (DR) rates
           </p>
         </div>
-        <div className="text-right">
-          <span className="text-xs font-bold text-slate-500">Current 7th CPC DR:</span>
-          <p className="font-bold text-saffron-600 text-xl leading-none">{drRate}%</p>
+        <div className="text-right bg-amber-50 px-4 py-2.5 rounded-2xl border border-amber-200">
+          <span className="text-xs font-bold text-amber-800">Current 7th CPC DR:</span>
+          <p className="font-heading font-extrabold text-saffron-600 text-2xl leading-none mt-0.5">{drRate}%</p>
         </div>
       </div>
 
@@ -155,41 +158,44 @@ export default function PensionCalculator() {
         </div>
 
         {/* Calculation Result Sheet */}
-        <div className="bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-white/10">
-          <p className="text-[11px] uppercase tracking-wider text-saffron-300 font-bold mb-4">
-            Estimated Monthly Credit (SPARSH / Bank)
-          </p>
+        <div className="bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-gold-400/40 glow-gold">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[11px] uppercase tracking-wider text-gold-300 font-extrabold">
+              Estimated Monthly Credit (SPARSH / Bank)
+            </p>
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          </div>
 
           <div className="space-y-3 pb-6 border-b border-white/10 text-xs sm:text-sm">
             <div className="flex justify-between">
-              <span className="text-white/70">OROP-2 Benchmark Basic:</span>
+              <span className="text-white/80 font-medium">OROP-2 Benchmark Basic:</span>
               <span className="font-mono font-bold text-white">₹{basicPension.toLocaleString()}</span>
             </div>
             {commutationPercentage > 0 && (
-              <div className="flex justify-between text-red-300">
-                <span>Commutation Deduction (-{commutationPercentage}%):</span>
-                <span className="font-mono font-semibold">-₹{Math.round(commutedAmount).toLocaleString()}</span>
+              <div className="flex justify-between text-rose-300">
+                <span className="font-medium">Commutation Deduction (-{commutationPercentage}%):</span>
+                <span className="font-mono font-bold">-₹{Math.round(commutedAmount).toLocaleString()}</span>
               </div>
             )}
             <div className="flex justify-between">
-              <span className="text-white/70">Dearness Relief (DR @ {drRate}%):</span>
-              <span className="font-mono font-bold text-green-300">+₹{dearnessRelief.toLocaleString()}</span>
+              <span className="text-emerald-300 font-medium">Dearness Relief (DR @ {drRate}%):</span>
+              <span className="font-mono font-bold text-emerald-400">+₹{dearnessRelief.toLocaleString()}</span>
             </div>
           </div>
 
           <div className="pt-6">
-            <p className="text-xs text-white/60 mb-1">Total Estimated Monthly Pension:</p>
-            <p className="font-heading font-black text-3xl sm:text-4xl text-saffron-300 leading-none">
+            <p className="text-xs text-white/70 mb-1 font-semibold">Total Estimated Monthly Pension:</p>
+            <p className="font-heading font-black text-3xl sm:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-saffron-400 via-amber-300 to-gold-400 leading-none drop-shadow-sm">
               ₹{totalMonthlyPension.toLocaleString()}
             </p>
-            <p className="text-[11px] text-white/50 mt-2">
+            <p className="text-xs text-gold-300/80 mt-2 font-medium">
               Annual Pension Payout: ~₹{annualized.toLocaleString()} / year
             </p>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
+          <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/70">
             <span>Disbursed via SPARSH PCDA</span>
-            <span className="text-saffron-400 font-semibold">ESM Nashik Helpdesk</span>
+            <span className="text-gold-300 font-bold">ESM Nashik Helpdesk</span>
           </div>
         </div>
       </div>

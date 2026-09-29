@@ -47,24 +47,24 @@ export default function AboutSection() {
             </p>
 
             <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-3">
-                <span className="w-8 h-8 rounded-lg bg-saffron-100 flex items-center justify-center text-lg shrink-0" aria-hidden="true">🎯</span>
+              <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-saffron-50/50 border border-saffron-200/60">
+                <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-saffron-500 to-amber-500 text-white flex items-center justify-center text-lg shrink-0 shadow-md" aria-hidden="true">🎯</span>
                 <div>
-                  <h3 className="font-semibold text-navy-800">Mission</h3>
+                  <h3 className="font-heading font-bold text-navy-900 text-base">Mission</h3>
                   <p className="text-navy-600 text-sm">To provide comprehensive welfare support, guidance, and assistance to ex-servicemen and their families in Nashik district.</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <span className="w-8 h-8 rounded-lg bg-navy-100 flex items-center justify-center text-lg shrink-0" aria-hidden="true">👁️</span>
+              <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-sky-50/50 border border-sky-200/60">
+                <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-iaf-500 to-blue-600 text-white flex items-center justify-center text-lg shrink-0 shadow-md" aria-hidden="true">👁️</span>
                 <div>
-                  <h3 className="font-semibold text-navy-800">Vision</h3>
+                  <h3 className="font-heading font-bold text-navy-900 text-base">Vision</h3>
                   <p className="text-navy-600 text-sm">To build a strong, connected, and well-supported veteran community where every ex-serviceman and their family has access to the benefits they deserve.</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <span className="w-8 h-8 rounded-lg bg-military-100 flex items-center justify-center text-lg shrink-0" aria-hidden="true">💚</span>
+              <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-emerald-50/50 border border-emerald-200/60">
+                <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-tiranga-600 text-white flex items-center justify-center text-lg shrink-0 shadow-md" aria-hidden="true">💚</span>
                 <div>
-                  <h3 className="font-semibold text-navy-800">Welfare Commitment</h3>
+                  <h3 className="font-heading font-bold text-navy-900 text-base">Welfare Commitment</h3>
                   <p className="text-navy-600 text-sm">We are committed to ensuring that no veteran or their family is left without support, information, or access to entitled benefits.</p>
                 </div>
               </div>
@@ -72,10 +72,10 @@ export default function AboutSection() {
 
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-navy-700 text-white hover:bg-navy-800 transition-all hover:-translate-y-0.5 shadow-md"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold bg-navy-900 text-gold-300 border-2 border-gold-400/40 hover:border-gold-400 hover:text-white hover:bg-navy-800 transition-all hover:-translate-y-0.5 shadow-lg group"
             >
-              Read More
-              <span className="transition-transform group-hover:translate-x-1">→</span>
+              <span>Learn More About Us</span>
+              <span className="transition-transform group-hover:translate-x-1.5 text-saffron-400">→</span>
             </Link>
           </div>
         </div>
@@ -83,14 +83,17 @@ export default function AboutSection() {
         {/* Sub-cards */}
         <div className="grid md:grid-cols-3 gap-6 mt-16">
           {[
-            { icon: '🛡️', title: 'Welfare & Assistance', desc: 'Comprehensive support for pension, OROP, medical, and government scheme-related matters.' },
-            { icon: '🤝', title: 'Veteran Community', desc: 'A platform to connect, share experiences, and build a strong support network among ex-servicemen.' },
-            { icon: '👨‍👩‍👧‍👦', title: 'Family Support', desc: 'Dedicated assistance for families, dependents, and war widows of our brave servicemen.' },
+            { icon: '🛡️', title: 'Welfare & Assistance', desc: 'Comprehensive support for pension, OROP, medical, and government scheme-related matters.', bar: 'from-amber-400 to-gold-500', iconBg: 'bg-amber-100 text-amber-800' },
+            { icon: '🤝', title: 'Veteran Community', desc: 'A platform to connect, share experiences, and build a strong support network among ex-servicemen.', bar: 'from-saffron-500 to-orange-500', iconBg: 'bg-orange-100 text-orange-800' },
+            { icon: '👨‍👩‍👧‍👦', title: 'Family Support', desc: 'Dedicated assistance for families, dependents, and war widows of our brave servicemen.', bar: 'from-emerald-500 to-tiranga-600', iconBg: 'bg-emerald-100 text-emerald-800' },
           ].map((card, i) => (
-            <div key={card.title} className={`reveal delay-${i + 1} premium-card p-6 text-center`}>
-              <span className="text-3xl mb-4 block" aria-hidden="true">{card.icon}</span>
-              <h3 className="font-heading font-bold text-navy-800 text-lg mb-2">{card.title}</h3>
-              <p className="text-navy-600 text-sm">{card.desc}</p>
+            <div key={card.title} className={`reveal delay-${i + 1} premium-card p-6 text-center relative overflow-hidden bg-white/95 border-2 border-navy-100/80 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1`}>
+              <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.bar}`} aria-hidden="true" />
+              <div className={`w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-2xl mb-4 ${card.iconBg} shadow-sm`} aria-hidden="true">
+                {card.icon}
+              </div>
+              <h3 className="font-heading font-bold text-navy-900 text-lg mb-2">{card.title}</h3>
+              <p className="text-navy-600 text-sm leading-relaxed">{card.desc}</p>
             </div>
           ))}
         </div>

@@ -159,11 +159,11 @@ export default function SeniorPensionersCare() {
 
         {/* Tab Selection */}
         <div className="flex justify-center mb-10">
-          <div className="bg-navy-900 p-1.5 rounded-2xl flex flex-wrap justify-center gap-1 border border-white/10">
+          <div className="bg-navy-900/90 p-1.5 rounded-2xl flex flex-wrap justify-center gap-1.5 border border-white/10 shadow-lg">
             <button
               onClick={() => setActiveTab('hike')}
               className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                activeTab === 'hike' ? 'bg-amber-500 text-navy-950 shadow-md' : 'text-white/70 hover:text-white'
+                activeTab === 'hike' ? 'bg-gradient-to-r from-amber-400 to-gold-500 text-navy-950 shadow-md font-extrabold scale-[1.02]' : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
             >
               📈 {language === 'mr' ? '८०+ वयाची वाढीव पेन्शन (+२०% ते १००%)' : '80+ Age Pension Hike Calculator'}
@@ -172,7 +172,7 @@ export default function SeniorPensionersCare() {
             <button
               onClick={() => setActiveTab('doorstep')}
               className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                activeTab === 'doorstep' ? 'bg-amber-500 text-navy-950 shadow-md' : 'text-white/70 hover:text-white'
+                activeTab === 'doorstep' ? 'bg-gradient-to-r from-emerald-500 to-tiranga-600 text-white shadow-md font-extrabold scale-[1.02]' : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
             >
               🏡 {language === 'mr' ? 'घरपोच जीवन प्रमाण दाखला' : 'Doorstep Life Certificate'}
@@ -181,7 +181,7 @@ export default function SeniorPensionersCare() {
             <button
               onClick={() => setActiveTab('concessions')}
               className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                activeTab === 'concessions' ? 'bg-amber-500 text-navy-950 shadow-md' : 'text-white/70 hover:text-white'
+                activeTab === 'concessions' ? 'bg-gradient-to-r from-sky-500 to-iaf-600 text-white shadow-md font-extrabold scale-[1.02]' : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
             >
               🚌 {language === 'mr' ? 'घरपट्टी सूट व एसटी बस सवलत' : 'Tax Rebate & Bus Pass'}
@@ -190,7 +190,7 @@ export default function SeniorPensionersCare() {
             <button
               onClick={() => setActiveTab('widowCare')}
               className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                activeTab === 'widowCare' ? 'bg-amber-500 text-navy-950 shadow-md' : 'text-white/70 hover:text-white'
+                activeTab === 'widowCare' ? 'bg-gradient-to-r from-rose-500 to-pink-600 text-white shadow-md font-extrabold scale-[1.02]' : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
             >
               🤝 {language === 'mr' ? 'पतीच्या पश्चात कुटुंब निवृत्तीवेतन' : 'Widow Pension Transition'}

@@ -5,9 +5,24 @@ import Link from 'next/link';
 import { events } from '@/lib/data';
 import { useReveal } from '@/lib/hooks';
 
+const categoryColorMap: Record<string, { badge: string; border: string }> = {
+  'Veterans Rally': { badge: 'bg-orange-50 text-saffron-700 border-saffron-300', border: 'from-saffron-500 to-amber-500' },
+  'Medical Camp': { badge: 'bg-emerald-50 text-emerald-700 border-emerald-300', border: 'from-emerald-500 to-teal-500' },
+  'Welfare': { badge: 'bg-sky-50 text-iaf-700 border-sky-300', border: 'from-iaf-500 to-blue-500' },
+  'Memorial': { badge: 'bg-rose-50 text-rose-700 border-rose-300', border: 'from-rose-500 to-armyred-500' },
+};
+
 function EventCard({ event, index }: { event: typeof events[0]; index: number }) {
+  const catTheme = (event.category && categoryColorMap[event.category]) || {
+    badge: 'bg-navy-50 text-navy-700 border-navy-300',
+    border: 'from-navy-600 to-navy-800',
+  };
+
   return (
-    <article className={`reveal delay-${(index % 3) + 1} premium-card overflow-hidden group flex-shrink-0 w-80 sm:w-auto`}>
+    <article className={`reveal delay-${(index % 3) + 1} premium-card overflow-hidden group flex-shrink-0 w-80 sm:w-auto border-2 border-navy-100/80 hover:border-gold-400/50 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white relative`}>
+      {/* Top Accent Strip */}
+      <div className={`h-1.5 w-full bg-gradient-to-r ${catTheme.border}`} aria-hidden="true" />
+
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         <Image
@@ -17,34 +32,47 @@ function EventCard({ event, index }: { event: typeof events[0]; index: number })
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-900/30 to-transparent" />
+
         {/* Date Badge */}
-        <div className="absolute top-4 left-4 bg-white rounded-xl px-3 py-2 text-center shadow-lg">
-          <p className="text-xs font-bold text-navy-500 uppercase">
+        <div className="absolute top-3.5 left-3.5 bg-navy-950/90 border border-gold-400/50 rounded-2xl px-3.5 py-1.5 text-center shadow-xl backdrop-blur-md">
+          <p className="text-[10px] font-black text-saffron-400 uppercase tracking-widest">
             {new Date(event.date).toLocaleDateString('en-IN', { month: 'short' })}
           </p>
-          <p className="text-2xl font-bold text-navy-800 leading-none">
+          <p className="text-2xl font-black text-white leading-none mt-0.5">
             {new Date(event.date).getDate()}
           </p>
         </div>
+
         {/* Status Badge */}
-        <div className={`absolute top-4 right-4 badge ${event.isUpcoming ? 'badge-saffron' : 'badge-navy'}`}>
-          {event.isUpcoming ? 'Upcoming' : 'Past Event'}
+        <div className={`absolute top-3.5 right-3.5 px-3 py-1 rounded-full text-[11px] font-extrabold shadow-md border ${
+          event.isUpcoming
+            ? 'bg-gradient-to-r from-saffron-500 to-amber-500 text-white border-amber-300'
+            : 'bg-navy-900/90 text-white/80 border-white/20'
+        }`}>
+          {event.isUpcoming ? '● Upcoming' : 'Past Event'}
         </div>
       </div>
 
       {/* Content */}
       <div className="p-6">
-        <div className="flex items-center gap-4 text-sm text-navy-500 mb-3">
-          <span className="flex items-center gap-1">
-            <span aria-hidden="true">🕐</span> {event.time}
-          </span>
-          <span className="flex items-center gap-1">
-            <span aria-hidden="true">📍</span> {event.location}
+        {/* Category & Time row */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          {event.category && (
+            <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${catTheme.badge}`}>
+              {event.category}
+            </span>
+          )}
+          <span className="flex items-center gap-1 text-xs text-navy-500 font-medium">
+            <span aria-hidden="true">🕐</span> {event.time.split('-')[0].trim()}
           </span>
         </div>
 
-        <h3 className="font-heading font-bold text-navy-800 text-lg mb-2 group-hover:text-navy-600 transition-colors">
+        <div className="flex items-center gap-1 text-xs text-navy-500 font-semibold mb-2.5">
+          <span aria-hidden="true">📍</span> <span className="truncate">{event.location}</span>
+        </div>
+
+        <h3 className="font-heading font-bold text-navy-900 text-lg mb-2 group-hover:text-navy-950 transition-colors line-clamp-1">
           {event.title}
         </h3>
 
@@ -54,9 +82,9 @@ function EventCard({ event, index }: { event: typeof events[0]; index: number })
 
         <Link
           href={`/events/${event.id}`}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-navy-600 hover:text-saffron-600 transition-colors group/link"
+          className="inline-flex items-center gap-2 text-sm font-bold text-saffron-600 hover:text-saffron-700 transition-colors group/link"
         >
-          View Event
+          <span>View Event</span>
           <span className="transition-transform group-hover/link:translate-x-1" aria-hidden="true">→</span>
         </Link>
       </div>
@@ -99,10 +127,10 @@ export default function EventsSection() {
         <div className="text-center">
           <Link
             href="/events"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-navy-700 border-2 border-navy-200 hover:bg-navy-50 transition-all hover:-translate-y-0.5 group"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl font-bold text-navy-900 border-2 border-navy-900/20 hover:border-gold-500 hover:bg-gradient-to-r hover:from-navy-950 hover:to-navy-900 hover:text-gold-300 transition-all hover:-translate-y-1 shadow-md hover:shadow-xl group"
           >
-            View All Events
-            <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            <span>View All Events & Rallies</span>
+            <span className="transition-transform group-hover:translate-x-1.5 text-saffron-500 group-hover:text-gold-300" aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

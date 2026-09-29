@@ -109,7 +109,7 @@ export default function MartyrsTributeSection() {
         </div>
 
         {/* Central Diya / Flame Homage Card */}
-        <div className="bg-gradient-to-b from-navy-900/90 to-navy-950/90 border border-saffron-500/30 rounded-3xl p-8 sm:p-12 mb-16 text-center max-w-2xl mx-auto shadow-2xl relative">
+        <div className="bg-gradient-to-b from-navy-900/95 via-navy-950/90 to-navy-950 border-2 border-gold-400/40 glow-gold rounded-3xl p-8 sm:p-12 mb-16 text-center max-w-2xl mx-auto shadow-2xl relative">
           {/* Falling Flower Petals animation when clicked */}
           {flowerPetals.length > 0 && (
             <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
@@ -178,7 +178,7 @@ export default function MartyrsTributeSection() {
             </svg>
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-bold font-heading mb-2 text-saffron-300">
+          <h3 className="text-xl sm:text-2xl font-extrabold font-heading mb-2 text-gold-300">
             {language === 'mr'
               ? 'अमर जवान — शत शत नमन'
               : language === 'hi'
@@ -186,7 +186,7 @@ export default function MartyrsTributeSection() {
               : 'Amar Jawan Jyoti — Eternal Flame of Honor'}
           </h3>
 
-          <p className="text-white/70 text-sm max-w-md mx-auto mb-6">
+          <p className="text-white/80 text-sm max-w-md mx-auto mb-6 italic">
             &ldquo;शहीदों की चिताओं पर लगेंगे हर बरस मेले, वतन पर मरने वालों का यही बाकी निशां होगा।&rdquo;
           </p>
 
@@ -194,20 +194,20 @@ export default function MartyrsTributeSection() {
           <button
             onClick={handlePayTribute}
             disabled={hasPaidTribute}
-            className={`px-8 py-3.5 rounded-full font-bold text-base transition-all transform duration-300 shadow-xl inline-flex items-center gap-2 ${
+            className={`px-8 py-3.5 rounded-full font-extrabold text-base transition-all transform duration-300 shadow-xl inline-flex items-center gap-2 ${
               hasPaidTribute
-                ? 'bg-military-700/80 text-white cursor-default border border-military-500/50'
-                : 'bg-gradient-to-r from-saffron-500 to-saffron-600 text-white hover:from-saffron-400 hover:to-saffron-500 hover:scale-105 active:scale-95 border border-saffron-300/40 shadow-saffron-500/25'
+                ? 'bg-military-800 text-gold-200 cursor-default border-2 border-gold-400/50 shadow-inner'
+                : 'bg-gradient-to-r from-saffron-500 via-amber-500 to-saffron-600 text-white hover:from-saffron-400 hover:to-amber-500 hover:scale-105 active:scale-95 border-2 border-amber-300/60 shadow-saffron-500/40 glow-saffron'
             }`}
           >
-            <span>{hasPaidTribute ? '🪔' : '✨'}</span>
+            <span className="text-xl">{hasPaidTribute ? '🪔' : '✨'}</span>
             <span>{hasPaidTribute ? t.diyaLit : t.lightDiya}</span>
           </button>
 
           {/* Counter */}
-          <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-center gap-2 text-sm text-white/80">
-            <span className="font-extrabold text-saffron-400 text-lg">{tributesCount.toLocaleString()}</span>
-            <span>{t.tributesCount}</span>
+          <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-center gap-2 text-sm text-white/85">
+            <span className="font-black text-gold-400 text-xl font-mono">{tributesCount.toLocaleString()}</span>
+            <span className="font-semibold">{t.tributesCount}</span>
           </div>
         </div>
 
@@ -216,27 +216,49 @@ export default function MartyrsTributeSection() {
           <BuglePlayer />
         </div>
 
-        {/* Honoring Local Heroes Cards */}
+        {/* Honoring Local Heroes Cards with Medal Ribbon Colors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {martyrsList.map((m, idx) => (
-            <div
-              key={idx}
-              className="bg-navy-900/60 border border-white/10 rounded-2xl p-6 hover:border-saffron-500/50 transition-all hover:-translate-y-1 shadow-lg"
-            >
-              <div className="inline-block px-2.5 py-1 rounded-md bg-saffron-500/20 text-saffron-300 text-xs font-bold mb-3 border border-saffron-500/30">
-                {m.award}
+          {martyrsList.map((m, idx) => {
+            const isPVC = m.award.includes('Param Vir Chakra');
+            const isAC = m.award.includes('Ashok Chakra');
+            const isSC = m.award.includes('Shaurya Chakra');
+
+            const cardStyle = isPVC
+              ? 'border-purple-400/60 bg-gradient-to-br from-purple-950/40 via-navy-950 to-navy-900 hover:border-purple-300'
+              : isAC
+              ? 'border-emerald-400/60 bg-gradient-to-br from-emerald-950/40 via-navy-950 to-navy-900 hover:border-emerald-300'
+              : isSC
+              ? 'border-amber-400/60 bg-gradient-to-br from-amber-950/40 via-navy-950 to-navy-900 hover:border-amber-300'
+              : 'border-rose-400/60 bg-gradient-to-br from-rose-950/40 via-navy-950 to-navy-900 hover:border-rose-300';
+
+            const badgeStyle = isPVC
+              ? 'bg-purple-900/80 text-purple-200 border-purple-400/50'
+              : isAC
+              ? 'bg-emerald-900/80 text-emerald-200 border-emerald-400/50'
+              : isSC
+              ? 'bg-amber-900/80 text-amber-200 border-amber-400/50'
+              : 'bg-rose-900/80 text-rose-200 border-rose-400/50';
+
+            return (
+              <div
+                key={idx}
+                className={`border-2 rounded-2xl p-6 transition-all hover:-translate-y-1.5 shadow-xl ${cardStyle}`}
+              >
+                <div className={`inline-block px-3 py-1 rounded-full text-xs font-black mb-3 border shadow-sm ${badgeStyle}`}>
+                  🎖️ {m.award}
+                </div>
+                <h4 className="font-heading font-extrabold text-lg text-white mb-1">{m.name}</h4>
+                <p className="text-xs text-gold-300 font-bold mb-2">{m.rankRegiment}</p>
+                <div className="text-xs text-white/60 mb-3 flex items-center gap-1">
+                  <span>📍</span>
+                  <span>{m.operationLocation} ({m.year})</span>
+                </div>
+                <p className="text-xs text-white/80 leading-relaxed italic border-t border-white/10 pt-3">
+                  &ldquo;{m.tributeSnippet}&rdquo;
+                </p>
               </div>
-              <h4 className="font-heading font-bold text-lg text-white mb-1">{m.name}</h4>
-              <p className="text-xs text-saffron-400 font-medium mb-2">{m.rankRegiment}</p>
-              <div className="text-xs text-white/50 mb-3 flex items-center gap-1">
-                <span>📍</span>
-                <span>{m.operationLocation} ({m.year})</span>
-              </div>
-              <p className="text-xs text-white/70 leading-relaxed italic">
-                &ldquo;{m.tributeSnippet}&rdquo;
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

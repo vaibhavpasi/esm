@@ -115,11 +115,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Tricolor top border stripe */}
-      <div className="fixed top-0 left-0 right-0 z-[70] h-1 bg-gradient-to-r from-saffron-500 via-white to-military-500" />
+      {/* Tricolor top border stripe with radiant glow */}
+      <div className="fixed top-0 left-0 right-0 z-[70] h-1.5 tricolor-glow-bar" />
 
       {/* Top utility & accessibility bar */}
-      <div className="relative z-[65] pt-1">
+      <div className="relative z-[65] pt-1.5">
         <TopBar />
       </div>
 
@@ -127,8 +127,8 @@ export default function Navbar() {
       <header
         className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0b1209]/98 backdrop-blur-xl py-2 border-b border-amber-400/35 shadow-2xl'
-            : 'bg-[#0e170d]/95 backdrop-blur-md py-3 border-b border-amber-400/20'
+            ? 'bg-[#050d1e]/98 backdrop-blur-xl py-2 border-b border-amber-400/40 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
+            : 'bg-gradient-to-r from-[#050d1e]/95 via-[#0c1f44]/95 to-[#0b1708]/95 backdrop-blur-md py-3 border-b border-amber-400/25'
         }`}
         role="banner"
       >
@@ -376,7 +376,7 @@ export default function Navbar() {
             {/* Apply for Membership CTA */}
             <Link
               href="/membership"
-              className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-navy-950 transition-all shadow-[0_2px_10px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_16px_rgba(245,158,11,0.5)] hover:-translate-y-0.5 whitespace-nowrap flex items-center gap-1"
+              className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-saffron-500 to-amber-500 hover:from-amber-300 hover:to-saffron-400 text-slate-950 transition-all shadow-[0_2px_14px_rgba(255,103,31,0.45)] hover:shadow-[0_4px_22px_rgba(255,103,31,0.65)] hover:-translate-y-0.5 whitespace-nowrap flex items-center gap-1.5 border border-amber-300/40"
             >
               <span>🎖️</span>
               <span>{t.ctaApply}</span>
